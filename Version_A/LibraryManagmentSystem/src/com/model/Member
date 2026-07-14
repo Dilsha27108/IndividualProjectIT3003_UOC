@@ -1,0 +1,55 @@
+package com.library.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Member {
+    private String memberId;
+    private String name;
+    private String email;
+    private List<String> borrowedBookIds;
+
+    private static final int MAX_BOOKS_ALLOWED = 3;
+
+    public Member(String memberId, String name, String email) {
+        this.memberId = memberId;
+        this.name = name;
+        this.email = email;
+        this.borrowedBookIds = new ArrayList<>();
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public List<String> getBorrowedBookIds() {
+        return borrowedBookIds;
+    }
+
+    public boolean canBorrowMore() {
+        return borrowedBookIds.size() < MAX_BOOKS_ALLOWED;
+    }
+
+    public void addBorrowedBook(String bookId) {
+        borrowedBookIds.add(bookId);
+    }
+
+    public void removeBorrowedBook(String bookId) {
+        borrowedBookIds.remove(bookId);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s (%s) - Books borrowed: %d/%d",
+                memberId, name, email, borrowedBookIds.size(), MAX_BOOKS_ALLOWED);
+    }
+}
